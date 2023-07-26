@@ -4,6 +4,12 @@ let gameBoard = ['', '', '', '', '', '', '', '', ''];
 let gameOver = false;
 let points = [0, 0];
 
+const winPatterns = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8], // Linhas
+  [0, 3, 6], [1, 4, 7], [2, 5, 8], // Colunas
+  [0, 4, 8], [2, 4, 6]             // Diagonais
+];
+
 // Selecionando os elementos do DOM
 const boxes = document.querySelectorAll('.box');
 const placarX = document.getElementById('pontos-1');
@@ -35,7 +41,7 @@ function makeMove(index, computerMode = false) {
     checkWinner();
 
     if (computerMode && currentPlayer === 'X' && !gameOver) {
-      setTimeout(makeComputerMove, 500);
+      setTimeout(makeComputerMove, 100);
     }
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     
@@ -56,25 +62,47 @@ function makeComputerMove() {
     }
   });
 
-  let randomIndex = Math.floor(Math.random() * emptyBoxesIndex.length);
-  let computerMoveIndex = emptyBoxesIndex[randomIndex];
-
+  // Verificar se há uma possível jogada defensiva ou marcar ponto
+  let randomIndex = findMove();
+  let computerMoveIndex= randomIndex;
+  
+  if (randomIndex === -1) { // Não há jogada defensiva ou de marcação de ponto
+    randomIndex = Math.floor(Math.random() * emptyBoxesIndex.length);
+    computerMoveIndex=emptyBoxesIndex[randomIndex];
+  }
+  
   gameBoard[computerMoveIndex] = 'O';
-
   boxes[computerMoveIndex].appendChild(createElement('O'));
-
+  
   checkWinner();
-
   currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
 }
 
+function findMove() {
+  for (const pattern of winPatterns) {
+    const [a, b, c] = pattern;
+    if (
+      (gameBoard[a] === 'O' && gameBoard[b] === 'O') || (gameBoard[a] === 'X' && gameBoard[b] === 'X') ||
+      (gameBoard[a] === 'O' && gameBoard[c] === 'O') || (gameBoard[a] === 'X' && gameBoard[c] === 'X') ||
+      (gameBoard[b] === 'O' && gameBoard[c] === 'O') || (gameBoard[b] === 'X' && gameBoard[c] === 'X')) 
+      {
+
+      const index= pattern.find(index => gameBoard[index] === '');
+      
+      if (typeof index === 'undefined') continue;
+      
+      return index; 
+    }
+  }
+
+  return -1;
+}
+
+
+
 // Função para verificar o vencedor
 function checkWinner() {
-  const winPatterns = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Linhas
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Colunas
-    [0, 4, 8], [2, 4, 6]             // Diagonais
-  ];
+
 
   for (const pattern of winPatterns) {
     const [a, b, c] = pattern;

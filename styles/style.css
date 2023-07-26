@@ -1,3 +1,8 @@
+:root{
+    --Xcolor:rgb(14, 14, 114);
+    --Ocolor:rgb(27, 202, 27);
+}
+
 body{
     text-align: center;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -59,7 +64,7 @@ body{
 /* Símbolos*/
 
 .X{
-    color: blue;
+    color: var(--Xcolor);
     font-size: 50px;
     display: inline-block;
     line-height: 100px;
@@ -68,7 +73,7 @@ body{
 .O{
     width: 40px;
     height: 40px;
-    border: 5px solid green;
+    border: 5px solid var(--Ocolor);
     border-radius: 50%;
     display:  inline-block;
     line-height: 100px;
@@ -88,14 +93,15 @@ h2{
     position: relative;
     background-color: rgb(212, 236, 255);
 }
+
 #x-pontos{
-    color: blue;
+    color: var(--Xcolor);
 }
 #o-pontos{
     display: inline-block;
     width: 10px;
     height: 10px;
-    border: 2px solid green;
+    border: 2px solid var(--Ocolor);
     border-radius: 50%;
     margin-left: 5px;
 }
