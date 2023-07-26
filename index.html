@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo da Velha- Menu Inicial</title>
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<body>
+    <h1 id="titulo">Jogo da Velha</h1>
+    <div id="botoesDiv">
+        <button id="2Jogadores">Player vs Player</button>
+        <button id="ComputadorJogador">Player vs CPU</button>
+    </div>
+    <br>
+    <!-- Container que simbolizará o Cerquilha-->
+    <div id="container" class="hide">
+        <div class="box empty boxTop boxLeft"></div>
+        <div class="box empty boxTop "></div>
+        <div class="box empty boxTop boxRight"></div>
+        <div class="box empty boxLeft"></div>
+        <div class="box empty"></div>
+        <div class="box empty boxRight"></div>
+        <div class="box empty boxBottom boxLeft"></div>
+        <div class="box empty boxBottom "></div>
+        <div class="box empty boxBottom boxRight"></div>
+    </div>
+
+    <div id="placar" class="">
+
+        <h2 id="placar">SCORE</h2>
+        <span class="pontos-caixa">
+            <span id="x-pontos">X</span>:
+            <span id="pontos-1">0</span>
+        </span>
+        <span class="pontos-caixa">
+            <span id="o-pontos"></span>:
+            <span id="pontos-0">0</span>
+        </span>
+
+    </div>
+
+    <div class="hide">
+        <div class="X">X</div>
+        <div class="O"></div>
+    </div>
+
+    <div id="mensagem" class="hide">
+        <p></p>
+    </div>
+
+    <script src="scripts/script.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>
